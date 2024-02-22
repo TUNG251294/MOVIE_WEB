@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="3">
-        <left-movie-info :data="data" />
+        <LeftMovieInfo :data="data" />
       </v-col>
       <v-col cols="12" sm="9">
         <div class="d-md-flex align-center">
@@ -57,32 +57,27 @@
                 </template>
               </v-virtual-scroll>
             </v-responsive>
-            <h3
-              class="pink--text font-weight-bold title"
-              v-if="recommendations.length"
-            >
-              Recommentation
-            </h3>
-            <v-slide-group multiple show-arrows>
-              <v-slide-item
-                v-for="(image, index) in recommendations.results"
-                :key="index"
-                v-slot="{ toggle }"
-              >
-                <v-card @click="toggle" class="ma-4">
-                  <v-img
-                    cover
-                    width="100"
-                    height="150"
-                    :src="`https://image.tmdb.org/t/p/w500${image.backdrop_path}`"
-                  />
-                </v-card>
-              </v-slide-item>
-            </v-slide-group>
           </v-col>
           <v-col cols="12" sm="4">
-            <right-movie-info :data="data" />
+            <RightMovieInfo :data="data" />
           </v-col>
+          <h3 class="pink--text font-weight-bold title">
+            Movies Recommentation
+          </h3>
+          <v-row class="mt-2">
+            <v-col
+              cols="3"
+              sm="3"
+              v-for="recommend in recommendations"
+              :key="recommend.id"
+            >
+              <v-card :to="`/movies/${recommend.id}`">
+                <v-img
+                  :src="`https://image.tmdb.org/t/p/w300${recommend.poster_path}`"
+                />
+              </v-card>
+            </v-col>
+          </v-row>
         </v-row>
       </v-col>
     </v-row>
@@ -102,10 +97,10 @@ export default {
         `/movie/${params.id}?append_to_response=credits,videos,images`
       );
       const res2 = await $axios.$get(`/movie/${params.id}/recommendations`);
-      console.log(res2);
+      // console.log(res2);
       return {
         data: res,
-        recommendations: res2,
+        recommendations: res2.results.slice(0,4)
       };
     } catch (e) {
       console.log(e.message);

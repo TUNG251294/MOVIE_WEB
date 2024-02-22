@@ -1,12 +1,15 @@
 <template>
   <div>
     <v-toolbar>
-      <v-toolbar-title>
+      <v-toolbar-title @click="$router.push('/')" style="cursor: pointer">
         <v-icon color="pink" size="64px">mdi-video</v-icon>
         MovieDB
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <span class="hidden-sm-and-up">
+        <v-app-bar-nav-icon @click="drawer = true" />
+      </span>
+      <v-toolbar-items class="hidden-xs-only">
         <v-btn
           text
           link
@@ -17,7 +20,20 @@
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
+      <v-btn icon><v-icon>mdi-magnify</v-icon></v-btn>
     </v-toolbar>
+    <v-navigation-drawer v-model="drawer" absolute temporary left>
+      <v-list dense nav>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+          :to="item.link"
+          link
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </div>
 </template>
 
@@ -25,6 +41,7 @@
 export default {
   data() {
     return {
+      drawer: false,
       items: [
         { title: "Movies", link: "/movies" },
         { title: "TV Series", link: "/tvseries" },

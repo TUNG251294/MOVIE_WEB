@@ -6,7 +6,7 @@
       <span v-if="getDirectors.length - 1 > index">, </span>
     </span>
     <h1 class="grey--text title">Genre</h1>
-    <span v-for="(genre, index) in getGenres" :key="index">
+    <span v-for="(genre, index) in getGenres" :key="'genre'+index">
       {{ genre.name }}
       <span v-if="getGenres.length - 1 > index">, </span>
     </span>
@@ -17,7 +17,7 @@
     <h1 class="grey--text title">Runtime</h1>
     <span> {{ getRuntime }} mins </span>
     <h1 class="grey--text title">Spoken Language</h1>
-    <span v-for="(language, index) in getLanguages" :key="index">
+    <span v-for="(language, index) in getLanguages" :key="'language'+index">
       {{ language.name }}
       <span v-if="getLanguages.length - 1 > index">, </span>
     </span>

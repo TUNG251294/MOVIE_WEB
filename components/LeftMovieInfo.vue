@@ -11,22 +11,31 @@
             depressed
             v-bind="attrs"
             v-on="on"
+            @click="openYoutubeModal"
           >
             <v-icon>mdi-arrow-right-drop-circle-outline</v-icon>
             <span>Watch Trailer</span>
           </v-btn>
         </template>
         <v-card>
-          <v-card-title class="text-h5 grey lighten-2">
-            Trailer here
+          <v-card-title>
+            <span class="headline">{{ data.title }}</span>
           </v-card-title>
-          <v-card-text> This is video </v-card-text>
+          <v-card-text>
+            <v-card-container>
+              <v-row>
+                <v-col cols="12">
+                  <div class="iframe-container">
+                    <iframe allowfullscreen :src="mediaUrl" v-if="isVideo" />
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card-container>
+          </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="dialog = false">
-              I accept
-            </v-btn>
+            <v-btn color="error" text @click="closeModal"> Close </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -34,7 +43,6 @@
         color="yellow"
         block
         depressed
-        tar
         v-if="data.homepage"
         :href="data.homepage"
         class="mt-2"
@@ -54,7 +62,24 @@ export default {
   data() {
     return {
       dialog: false,
+      mediaUrl: "",
+      isVideo: false,
     };
+  },
+  methods: {
+    getTrailer() {
+      if (!this.data.videos) return;
+      const video = this.data.videos.results.find((e) => {
+        return e.type === "Trailer";
+      });
+      return "https://www.youtube.com/embed/" + video.key;
+    },
+    closeModal() {
+      (this.dialog = false), (this.isVideo = false);
+    },
+    openYoutubeModal() {
+      (this.mediaUrl = this.getTrailer()), (this.isVideo = true);
+    },
   },
 };
 </script>
