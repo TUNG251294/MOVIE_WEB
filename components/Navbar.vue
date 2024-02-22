@@ -20,7 +20,9 @@
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
-      <v-btn icon><v-icon>mdi-magnify</v-icon></v-btn>
+      <v-btn icon @click="$nuxt.$emit('openOverlay', true)">
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" absolute temporary left>
       <v-list dense nav>
@@ -43,13 +45,13 @@ export default {
     return {
       drawer: false,
       items: [
-        { title: "Movies", link: "/movies" },
-        { title: "TV Series", link: "/tvseries" },
-        { title: "Actors", link: "/actors" },
-      ],
-    };
-  },
-};
+        { title: 'Movies', link: '/movies' },
+        { title: 'TV Series', link: '/tvseries' },
+        { title: 'Actors', link: '/actors' }
+      ]
+    }
+  }
+}
 </script>
 
 <style></style>

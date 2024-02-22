@@ -7,9 +7,36 @@
       </v-container>
     </v-main>
     <Footer />
+    <v-overlay
+      v-model="overlay"
+      contained
+      opacity="0.95"
+      class="align-start justify-end pr-4"
+    >
+    <div >
+      <Search />
+      <v-btn color="black" absolute right @click="overlay = false">
+        Close
+      </v-btn>
+    </div>
+    </v-overlay>
   </v-app>
 </template>
 
 <script>
-export default {};
+import Search from "~/components/Search.vue"
+export default {
+  components: { Search },
+  data: () => ({
+    overlay: false
+  }),
+  created() {
+    this.$nuxt.$on("openOverlay", ($event) => (this.overlay = $event))
+  },
+  watch: {
+    $route(to, from) {
+      this.overlay = false
+    }
+  }
+}
 </script>
