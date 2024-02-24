@@ -19,11 +19,7 @@
     <v-row v-else-if="$fetchState.error">
       <h2 class="error">An error occurred!</h2>
     </v-row>
-    <v-row v-else>
-      <v-col cols="12" sm="3" v-for="movie in movies" :key="movie.id">
-        <MovieCard :movie="movie" />
-      </v-col>
-    </v-row>
+        <SectionMovies v-else :movies="movies" />
     <v-row>
       <v-col cols="12">
         <v-pagination
@@ -38,7 +34,9 @@
 </template>
 
 <script>
+import SectionMovies from '~/components/pages/movies/SectionMovies.vue'
 export default {
+  components: { SectionMovies },
   data() {
     return {
       movies: [],
@@ -73,6 +71,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

@@ -1,39 +1,48 @@
 <template>
   <v-container>
-    <section-title title="Popular Movies" link="/movies" />
-    <v-row v-if="movies.length">
-      <v-col cols="12" sm="4" v-for="movie in movies" :key="movie.id">
-        <movie-card :movie="movie" />
+    <SectionTitle title="Popular Movies" link="/movies"/>
+    <v-row v-if="!movies.length">
+      <v-col cols="12" sm="3" v-for="i in 8" :key="i">
+        <v-skeleton-loader type="image, list-item-two-line" />
       </v-col>
     </v-row>
-    <section-title title="Upcoming Movies" link="/movies" />
-    <v-row v-if="movies.length">
-      <v-col cols="12" sm="4" v-for="item in upcoming" :key="item.id">
-        <movie-card :movie="item" />
+    <SectionMovies v-else :movies="movies" />
+    <SectionTitle title="Upcoming Movies" link="/movies" />
+    <v-row v-if="!upcoming.length">
+      <v-col cols="12" sm="3" v-for="i in 8" :key="i">
+        <v-skeleton-loader type="image, list-item-two-line" />
       </v-col>
     </v-row>
+    <SectionMovies v-else :movies="upcoming" />
   </v-container>
 </template>
 
 <script>
-import MovieCard from "~/components/MovieCard.vue";
-import SectionTitle from "~/components/SectionTitle.vue";
+import SectionTitle from "~/components/organisms/SectionTitle.vue"
+import SectionMovies from "~/components/pages/movies/SectionMovies.vue"
 export default {
-  components: { MovieCard, SectionTitle },
-  async asyncData({ $axios }) {
-    try {
-      const res = await $axios.$get("/movie/popular");
-      const res2 = await $axios.$get("/movie/upcoming");
-      return {
-        movies: res.results.slice(0, 6),
-        upcoming: res2.results.slice(0, 6),
-      };
-    } catch (e) {
-      console.log(e.message);
-      return { movies: [], upcoming: [] };
+  components: { SectionTitle, SectionMovies },
+  data() {
+    return {
+      movies: [],
+      upcoming: [],
     }
   },
-};
+  mounted() {
+    this.getMovies()
+  },
+  methods: {
+    async getMovies() {
+      try {
+        const res = await this.$axios.$get("/movie/popular")
+        const res2 = await this.$axios.$get("/movie/upcoming")
+        this.movies = res.results.slice(0, 8)
+        this.upcoming = res2.results.slice(0, 8)
+      } catch (e) {
+        this.loading = false
+        console.log(e.message);
+      }
+    }
+  }
+}
 </script>
-
-<style></style>

@@ -2,7 +2,7 @@
   <v-banner>
     <v-img :src="`https://image.tmdb.org/t/p/w500${data.poster_path}`"> </v-img>
     <div class="text-center mt-2">
-      <v-dialog v-model="dialog" width="500">
+      <v-dialog v-if="mediaUrl && mediaUrl.length" v-model="dialog" width="500">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="red lighten-1"
@@ -22,7 +22,6 @@
             <span class="headline">{{ data.title }}</span>
           </v-card-title>
           <v-card-text>
-            <v-card-container>
               <v-row>
                 <v-col cols="12">
                   <div class="iframe-container">
@@ -30,7 +29,6 @@
                   </div>
                 </v-col>
               </v-row>
-            </v-card-container>
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions>
@@ -57,31 +55,32 @@
 <script>
 export default {
   props: {
-    data: { type: Object },
+    data: { type: Object }
   },
   data() {
     return {
       dialog: false,
-      mediaUrl: "",
       isVideo: false,
-    };
+      mediaUrl: this.getTrailer()
+    }
   },
   methods: {
     getTrailer() {
       if (!this.data.videos) return;
       const video = this.data.videos.results.find((e) => {
-        return e.type === "Trailer";
-      });
-      return "https://www.youtube.com/embed/" + video.key;
+        return e.type === 'Trailer'
+      })
+      if(video){
+        return 'https://www.youtube.com/embed/' + video.key
+      }
     },
     closeModal() {
-      (this.dialog = false), (this.isVideo = false);
+      this.dialog = false
+      this.isVideo = false
     },
     openYoutubeModal() {
-      (this.mediaUrl = this.getTrailer()), (this.isVideo = true);
-    },
-  },
-};
+      this.isVideo = true
+    }
+  }
+}
 </script>
-
-<style></style>

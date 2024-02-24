@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="grey--text title">Director</h1>
+    <h1 v-if="getDirectors.length" class="grey--text title">Director</h1>
     <span v-for="(director, index) in getDirectors" :key="index">
       {{ director.name }}
       <span v-if="getDirectors.length - 1 > index">, </span>
@@ -27,41 +27,41 @@
 <script>
 export default {
   props: {
-    data: { type: Object },
+    data: { type: Object }
+  },
+  data() {
+    return {}
   },
   computed: {
     getDirectors() {
       let directors = [];
       for (const item of this.data.credits.crew) {
         if (item.job === "Director") {
-          directors.push(item);
+          directors.push(item)
         }
       }
-      console.log(directors);
-      return directors;
+      return directors
     },
     getGenres() {
-      let genres = [];
+      let genres = []
       for (const item of this.data.genres) {
-        genres.push(item);
+        genres.push(item)
       }
-      return genres;
+      return genres
     },
     getReleaseDate() {
-      return this.data.release_date;
+      return this.data.release_date
     },
     getRuntime() {
-      return this.data.runtime;
+      return this.data.runtime
     },
     getLanguages() {
-      let languages = [];
+      let languages = []
       for (const item of this.data.spoken_languages) {
-        languages.push(item);
+        languages.push(item)
       }
-      return languages;
-    },
-  },
-};
+      return languages
+    }
+  }
+}
 </script>
-
-<style></style>

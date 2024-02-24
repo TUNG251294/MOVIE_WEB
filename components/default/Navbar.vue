@@ -9,7 +9,7 @@
       <span class="hidden-sm-and-up">
         <v-app-bar-nav-icon @click="drawer = true" />
       </span>
-      <v-toolbar-items class="hidden-xs-only">
+      <v-toolbar-items class="hidden-xs-only py-2">
         <v-btn
           text
           link
@@ -20,7 +20,7 @@
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
-      <v-btn icon @click="$nuxt.$emit('openOverlay', true)">
+      <v-btn icon @click="$nuxt.$emit('openOverlay', true)" class="mr-4">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-toolbar>
@@ -46,12 +46,9 @@ export default {
       drawer: false,
       items: [
         { title: 'Movies', link: '/movies' },
-        { title: 'TV Series', link: '/tvseries' },
-        { title: 'Actors', link: '/actors' }
+        { title: 'TV Series', link: '/tvseries' }
       ]
     }
   }
 }
 </script>
-
-<style></style>

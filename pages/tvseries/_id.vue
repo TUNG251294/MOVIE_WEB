@@ -2,17 +2,17 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="3">
-        <LeftMovieInfo :data="data" />
+        <LeftTVSerieInfo :data="data" />
       </v-col>
       <v-col cols="12" sm="9">
         <div class="d-md-flex align-center">
           <h1 class="display-1 font-weight-bold">
-            {{ data.original_title }}
+            {{ data.name }}
           </h1>
           <v-spacer></v-spacer>
           <rating :data="data" />
         </div>
-        <SocialShare />
+        <social-share />
         <v-divider class="my-4" />
         <v-row>
           <v-col cols="12" sm="8">
@@ -56,7 +56,7 @@
             </v-responsive>
           </v-col>
           <v-col cols="12" sm="4">
-            <RightMovieInfo :data="data" />
+            <RightTVSerieInfo :data="data" />
           </v-col>
           <h3 class="pink--text font-weight-bold title">
             Movies Recommentation
@@ -68,7 +68,7 @@
               v-for="recommend in recommendations"
               :key="recommend.id"
             >
-              <v-card :to="`/movies/${recommend.id}`">
+              <v-card :to="`/tvseries/${recommend.id}`">
                 <v-img
                   :src="`https://image.tmdb.org/t/p/w300${recommend.poster_path}`"
                 />
@@ -82,46 +82,46 @@
 </template>
 
 <script>
+import LeftTVSerieInfo from "~/components/pages/tvseries/LeftTVSerieInfo.vue"
 import Rating from "~/components/organisms/Rating.vue"
-import RightMovieInfo from "~/components/pages/movies/RightMovieInfo.vue"
 import SocialShare from "~/components/organisms/SocialShare.vue"
-import LeftMovieInfo from '~/components/pages/movies/LeftMovieInfo.vue'
+import RightTVSerieInfo from '~/components/pages/tvseries/RightTVSerieInfo.vue'
 export default {
-  components: { LeftMovieInfo , Rating, SocialShare, RightMovieInfo},
+  components: { LeftTVSerieInfo, Rating, SocialShare, RightTVSerieInfo },
   async asyncData({ params, $axios }) {
     try {
       const res = await $axios.$get(
-        `/movie/${params.id}?append_to_response=credits,videos,images`
-      )
-      const res2 = await $axios.$get(`/movie/${params.id}/recommendations`)
+        `/tv/${params.id}?append_to_response=credits,videos,images`
+      );
+      const res2 = await $axios.$get(`/tv/${params.id}/recommendations`);
       return {
         data: res,
         recommendations: res2.results.slice(0,4)
-      }
+      };
     } catch (e) {
-      console.log(e.message)
+      console.log(e.message);
       return {
         data: [],
-        recommendations: []
-      }
+        recommendations: [],
+      };
     }
   },
   computed: {
     getCasts() {
-      let casts = []
+      let casts = [];
       for (const item of this.data.credits.cast) {
-        casts.push(item)
+        casts.push(item);
       }
-      return casts
-    }
+      return casts;
+    },
   },
   methods: {
     getCastAvatar(profile_path) {
       if (profile_path) {
-        return `https://image.tmdb.org/t/p/w45${profile_path}`
+        return `https://image.tmdb.org/t/p/w45${profile_path}`;
       }
-      return "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png"
-    }
-  }
-}
+      return "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png";
+    },
+  },
+};
 </script>

@@ -11,22 +11,24 @@
       v-model="overlay"
       contained
       opacity="0.95"
-      class="align-start justify-end pr-4"
+      class="align-start justify-end pr-11"
     >
-    <div >
-      <Search />
-      <v-btn color="black" absolute right @click="overlay = false">
-        Close
-      </v-btn>
-    </div>
+      <div >
+        <Search />
+        <v-btn color="black" absolute right @click="overlay = false">
+          Close
+        </v-btn>
+      </div>
     </v-overlay>
   </v-app>
 </template>
 
 <script>
-import Search from "~/components/Search.vue"
+import Search from "~/components/organisms/Search.vue"
+import Footer from '~/components/default/Footer.vue'
+import Navbar from '~/components/default/Navbar.vue'
 export default {
-  components: { Search },
+  components: { Search, Navbar, Footer },
   data: () => ({
     overlay: false
   }),

@@ -1,10 +1,10 @@
 <template>
-  <v-toolbar outlined flat class="my-4">
+  <v-toolbar outlined flat class="my-4" color="grey lighten-2">
     <v-toolbar-title>{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn text color="red" :to="link"
-      >See More <v-icon right>mdi-chevron-double-right</v-icon></v-btn
-    >
+    <v-btn text color="red" :to="link">
+      See More <v-icon right>mdi-chevron-double-right</v-icon>
+    </v-btn>
   </v-toolbar>
 </template>
 
@@ -16,5 +16,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

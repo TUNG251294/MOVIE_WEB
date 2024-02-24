@@ -20,6 +20,13 @@
           movie.vote_average
         }}</span>
       </v-row>
+      <v-row>
+        <v-col cols="12">
+          <v-chip v-for="genre in movie.genre_ids" :key="genre" label small color="pink" class="white--text mr-1 mb-1">
+            {{genreTypeName(genre)}}
+          </v-chip>
+        </v-col>
+      </v-row>
     </v-card-text>
   </v-card>
 </template>
@@ -29,10 +36,21 @@ export default {
   props: {
     movie: {
       type: Object,
-      required: true,
+      required: true
     },
+    genres: {
+      type: Array,
+      required: false
+    }
   },
-};
+  methods: {
+    genreTypeName(genreId){
+      for(const genre of this.genres){
+        if(genre.id == genreId){
+          return genre.name
+        }
+      }
+    }
+  }
+}
 </script>
-
-<style></style>
