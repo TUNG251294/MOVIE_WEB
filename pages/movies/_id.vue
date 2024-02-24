@@ -10,7 +10,7 @@
             {{ data.original_title }}
           </h1>
           <v-spacer></v-spacer>
-          <rating :data="data" />
+          <Rating :data="data" />
         </div>
         <SocialShare />
         <v-divider class="my-4" />

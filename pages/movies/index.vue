@@ -46,28 +46,28 @@ export default {
       currentPage:
         parseInt(this.$route.query.page) > 1
           ? parseInt(this.$route.query.page)
-          : 1,
-    };
+          : 1
+    }
   },
   async fetch() {
     await this.$axios
       .$get(`/movie/${this.getBy}?page=${this.currentPage}`)
       .then((response) => {
-        this.movies = response.results;
-        this.totalResults = response.total_results;
-        this.totalPages = response.total_pages;
-        this.$router.push({ query: { page: this.currentPage } });
-      });
+        this.movies = response.results
+        this.totalResults = response.total_results
+        this.totalPages = response.total_pages
+        this.$router.push({ query: { page: this.currentPage } })
+      })
   },
   methods: {
     handlePageChange(value) {
-      this.currentPage = value;
-      this.$fetch();
+      this.currentPage = value
+      this.$fetch()
     },
     handleGetBy(value) {
-      this.getBy = value;
-      this.$fetch();
-    },
-  },
-};
+      this.getBy = value
+      this.$fetch()
+    }
+  }
+}
 </script>

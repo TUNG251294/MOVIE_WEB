@@ -12,7 +12,7 @@
 export default {
   props: {
     title: { type: String },
-    link: { type: String },
-  },
-};
+    link: { type: String }
+  }
+}
 </script>

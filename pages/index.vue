@@ -21,6 +21,12 @@
 import SectionTitle from "~/components/organisms/SectionTitle.vue"
 import SectionMovies from "~/components/pages/movies/SectionMovies.vue"
 export default {
+  layout: 'homepage',
+  head() {
+    return {
+      title: 'MovieDB'
+    }
+  },
   components: { SectionTitle, SectionMovies },
   data() {
     return {
