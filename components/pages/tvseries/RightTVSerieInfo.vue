@@ -33,34 +33,34 @@ export default {
   },
   computed: {
     getDirectors() {
-      let directors = [];
+      let directors = []
       for (const item of this.data.credits.crew) {
         if (item.job === "Director") {
-          directors.push(item);
+          directors.push(item)
         }
       }
-      return directors;
+      return directors
     },
     getGenres() {
-      let genres = [];
+      let genres = []
       for (const item of this.data.genres) {
-        genres.push(item);
+        genres.push(item)
       }
-      return genres;
+      return genres
     },
     getFirstAirDate() {
-      return this.data.first_air_date;
+      return this.data.first_air_date
     },
     getEpisodes() {
-      return this.data.episode_run_time;
+      return this.data.episode_run_time
     },
     getLanguages() {
-      let languages = [];
+      let languages = []
       for (const item of this.data.spoken_languages) {
-        languages.push(item);
+        languages.push(item)
       }
-      return languages;
-    },
-  },
-};
+      return languages
+    }
+  }
+}
 </script>

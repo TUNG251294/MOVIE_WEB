@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <div class="text-center my-4">
-      <v-btn value="popular" class="mr-2" @click="handleGetBy('popular')"
+      <v-btn value="popular" class="mr-2" :color="(getBy == 'popular')? 'primary' : ''" @click="handleGetBy('popular')"
         >Popular</v-btn
       >
-      <v-btn value="on_the_air" class="mr-2" @click="handleGetBy('on_the_air')"
+      <v-btn value="on_the_air" class="mr-2" :color="(getBy == 'on_the_air')? 'primary' : ''" @click="handleGetBy('on_the_air')"
         >On The Air</v-btn
       >
-      <v-btn value="top_rated" class="mr-2" @click="handleGetBy('top_rated')"
+      <v-btn value="top_rated" class="mr-2" :color="(getBy == 'top_rated')? 'primary' : ''" @click="handleGetBy('top_rated')"
         >Top Rated</v-btn
       >
     </div>
@@ -36,6 +36,11 @@
 <script>
 import SectionTVs from '~/components/pages/tvseries/SectionTVs.vue';
 export default {
+head() {
+    return {
+      title: 'TV Series'
+    }
+  },
   components: { SectionTVs },
   data() {
     return {
@@ -46,28 +51,28 @@ export default {
       currentPage:
         parseInt(this.$route.query.page) > 1
           ? parseInt(this.$route.query.page)
-          : 1,
-    };
+          : 1
+    }
   },
   async fetch() {
     await this.$axios
       .$get(`/tv/${this.getBy}?page=${this.currentPage}`)
       .then((response) => {
-        this.tvseries = response.results;
-        this.totalResults = response.total_results;
-        this.totalPages = response.total_pages;
-        this.$router.push({ query: { page: this.currentPage } });
-      });
+        this.tvseries = response.results
+        this.totalResults = response.total_results
+        this.totalPages = response.total_pages
+        this.$router.push({ query: { page: this.currentPage } })
+      })
   },
   methods: {
     handlePageChange(value) {
-      this.currentPage = value;
-      this.$fetch();
+      this.currentPage = value
+      this.$fetch()
     },
     handleGetBy(value) {
-      this.getBy = value;
-      this.$fetch();
-    },
-  },
-};
+      this.getBy = value
+      this.$fetch()
+    }
+  }
+}
 </script>

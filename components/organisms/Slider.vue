@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Rating from "~/components/organisms/Rating.vue"
+import Rating from '~/components/organisms/Rating.vue'
 export default {
   components: { Rating },
   props: {
@@ -53,7 +53,8 @@ export default {
   },
   data() {
     return {
-      onboarding: 0,sliderMovies: [],
+      onboarding: 0,
+      sliderMovies: []
     }
   },
   mounted(){
@@ -69,12 +70,12 @@ export default {
     },
     next() {
       this.onboarding =
-        this.onboarding + 1 === this.sliderMovies.length ? 0 : this.onboarding + 1;
+        this.onboarding + 1 === this.sliderMovies.length ? 0 : this.onboarding + 1
     },
     prev() {
       this.onboarding =
-        this.onboarding - 1 < 0 ? this.sliderMovies.length - 1 : this.onboarding - 1;
-    },
-  },
-};
+        this.onboarding - 1 < 0 ? this.sliderMovies.length - 1 : this.onboarding - 1
+    }
+  }
+}
 </script>

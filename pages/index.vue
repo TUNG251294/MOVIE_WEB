@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       movies: [],
-      upcoming: [],
+      upcoming: []
     }
   },
   mounted() {
@@ -46,7 +46,7 @@ export default {
         this.upcoming = res2.results.slice(0, 8)
       } catch (e) {
         this.loading = false
-        console.log(e.message);
+        console.log(e.message)
       }
     }
   }

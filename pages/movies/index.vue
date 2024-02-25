@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <div class="text-center my-4">
-      <v-btn value="popular" class="mr-2" @click="handleGetBy('popular')"
+      <v-btn value="popular" class="mr-2" :color="(getBy == 'popular')? 'primary' : ''" @click="handleGetBy('popular')"
         >Popular</v-btn
       >
-      <v-btn value="upcoming" class="mr-2" @click="handleGetBy('upcoming')"
+      <v-btn value="upcoming" class="mr-2" :color="(getBy == 'upcoming')? 'primary' : ''" @click="handleGetBy('upcoming')"
         >Upcoming</v-btn
       >
-      <v-btn value="top_rated" class="mr-2" @click="handleGetBy('top_rated')"
+      <v-btn value="top_rated" class="mr-2" :color="(getBy == 'top_rated')? 'primary' : ''" @click="handleGetBy('top_rated')"
         >Top Rated</v-btn
       >
     </div>
@@ -36,6 +36,11 @@
 <script>
 import SectionMovies from '~/components/pages/movies/SectionMovies.vue'
 export default {
+  head() {
+    return {
+      title: 'Movies'
+    }
+  },
   components: { SectionMovies },
   data() {
     return {

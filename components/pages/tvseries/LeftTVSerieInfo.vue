@@ -2,7 +2,7 @@
   <v-banner>
     <v-img :src="`https://image.tmdb.org/t/p/w500${data.poster_path}`"> </v-img>
     <div class="text-center mt-2">
-      <v-dialog v-if="mediaUrl && mediaUrl.length" v-model="dialog" width="500">
+      <v-dialog v-if="getTrailer" v-model="dialog" width="500">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="red lighten-1"
@@ -25,7 +25,7 @@
               <v-row>
                 <v-col cols="12">
                   <div class="iframe-container">
-                    <iframe allowfullscreen :src="mediaUrl" v-if="isVideo" />
+                    <iframe allowfullscreen :src="getTrailer" v-if="isVideo" />
                   </div>
                 </v-col>
               </v-row>
@@ -61,10 +61,9 @@ export default {
     return {
       dialog: false,
       isVideo: false,
-      mediaUrl: this.getTrailer()
     }
   },
-  methods: {
+  computed: {
     getTrailer() {
       if (!this.data.videos) return;
       const video = this.data.videos.results.find((e) => {
@@ -73,7 +72,9 @@ export default {
       if(video){
         return 'https://www.youtube.com/embed/' + video.key
       }
-    },
+    }
+  },
+  methods: {
     closeModal() {
       this.dialog = false
       this.isVideo = false

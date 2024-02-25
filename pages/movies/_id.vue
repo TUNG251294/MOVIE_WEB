@@ -82,9 +82,9 @@
 </template>
 
 <script>
-import Rating from "~/components/organisms/Rating.vue"
-import RightMovieInfo from "~/components/pages/movies/RightMovieInfo.vue"
-import SocialShare from "~/components/organisms/SocialShare.vue"
+import Rating from '~/components/organisms/Rating.vue'
+import RightMovieInfo from '~/components/pages/movies/RightMovieInfo.vue'
+import SocialShare from '~/components/organisms/SocialShare.vue'
 import LeftMovieInfo from '~/components/pages/movies/LeftMovieInfo.vue'
 export default {
   components: { LeftMovieInfo , Rating, SocialShare, RightMovieInfo},

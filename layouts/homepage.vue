@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import Search from "~/components/organisms/Search.vue"
+import Search from '~/components/organisms/Search.vue'
 import Footer from '~/components/default/Footer.vue'
 import Navbar from '~/components/default/Navbar.vue'
 import Slider from '~/components/organisms/Slider.vue'
 export default {
   components: { Search, Navbar, Footer, Slider },
   data: () => ({
-    overlay: false,
+    overlay: false
   }),
   created() {
     this.$nuxt.$on("openOverlay", ($event) => (this.overlay = $event))
