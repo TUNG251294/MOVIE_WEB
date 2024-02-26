@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <div class="text-center my-4">
-      <v-btn value="popular" class="mr-2" :color="(getBy == 'popular')? 'primary' : ''" @click="handleGetBy('popular')"
+      <v-btn value="popular" class="mr-2 mb-2" :link=true to="/tvseries/popular"
         >Popular</v-btn
       >
-      <v-btn value="upcoming" class="mr-2" :color="(getBy == 'upcoming')? 'primary' : ''" @click="handleGetBy('upcoming')"
-        >Upcoming</v-btn
+      <v-btn value="on_the_air" class="mr-2 mb-2" color='primary'
+        >On The Air</v-btn
       >
-      <v-btn value="top_rated" class="mr-2" :color="(getBy == 'top_rated')? 'primary' : ''" @click="handleGetBy('top_rated')"
+      <v-btn value="top_rated" class="mr-2 mb-2" :link=true to="/tvseries/top-rated"
         >Top Rated</v-btn
       >
     </div>
@@ -19,7 +19,7 @@
     <v-row v-else-if="$fetchState.error">
       <h2 class="error">An error occurred!</h2>
     </v-row>
-        <SectionMovies v-else :movies="movies" />
+        <SectionTVs v-else :tvseries="tvseries" />
     <v-row>
       <v-col cols="12">
         <v-pagination
@@ -34,18 +34,17 @@
 </template>
 
 <script>
-import SectionMovies from '~/components/pages/movies/SectionMovies.vue'
+import SectionTVs from '~/components/pages/tvseries/SectionTVs.vue';
 export default {
-  head() {
+head() {
     return {
-      title: 'Movies'
+      title: 'TV Series'
     }
   },
-  components: { SectionMovies },
+  components: { SectionTVs },
   data() {
     return {
-      movies: [],
-      getBy: "popular",
+      tvseries: [],
       totalResults: 1,
       totalPages: 1,
       currentPage:
@@ -56,9 +55,9 @@ export default {
   },
   async fetch() {
     await this.$axios
-      .$get(`/movie/${this.getBy}?page=${this.currentPage}`)
+      .$get(`/tv/on_the_air?page=${this.currentPage}`)
       .then((response) => {
-        this.movies = response.results
+        this.tvseries = response.results
         this.totalResults = response.total_results
         this.totalPages = response.total_pages
         this.$router.push({ query: { page: this.currentPage } })
@@ -67,10 +66,6 @@ export default {
   methods: {
     handlePageChange(value) {
       this.currentPage = value
-      this.$fetch()
-    },
-    handleGetBy(value) {
-      this.getBy = value
       this.$fetch()
     }
   }

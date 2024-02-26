@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <SectionTitle title="Popular Movies" link="/movies"/>
+    <SectionTitle title="Popular Movies" link="/movies/popular"/>
     <v-row v-if="!movies.length">
       <v-col cols="12" sm="3" v-for="i in 8" :key="i">
         <v-skeleton-loader type="image, list-item-two-line" />
       </v-col>
     </v-row>
     <SectionMovies v-else :movies="movies" />
-    <SectionTitle title="Upcoming Movies" link="/movies" />
+    <SectionTitle title="Upcoming Movies" link="/movies/upcoming" />
     <v-row v-if="!upcoming.length">
       <v-col cols="12" sm="3" v-for="i in 8" :key="i">
         <v-skeleton-loader type="image, list-item-two-line" />
@@ -24,7 +24,7 @@ export default {
   layout: 'homepage',
   head() {
     return {
-      title: 'MovieDB'
+      title: 'MovieWeb'
     }
   },
   components: { SectionTitle, SectionMovies },

@@ -2,8 +2,8 @@
   <div>
     <v-toolbar>
       <v-toolbar-title @click="$router.push('/')" style="cursor: pointer">
-        <v-icon color="pink" size="64px">mdi-video</v-icon>
-        MovieDB
+        <v-icon color="pink" size="64px" class="mr-2">mdi-video</v-icon>
+        MovieWeb
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <span class="hidden-sm-and-up">
@@ -45,8 +45,8 @@ export default {
     return {
       drawer: false,
       items: [
-        { title: 'Movies', link: '/movies' },
-        { title: 'TV Series', link: '/tvseries' }
+        { title: 'Movies', link: '/movies/popular' },
+        { title: 'TV Series', link: '/tvseries/popular' }
       ]
     }
   }

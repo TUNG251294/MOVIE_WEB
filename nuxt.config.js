@@ -4,8 +4,8 @@ const token =
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - movie",
-    title: "movie",
+    // titleTemplate: "%s - movie",
+    // title: "movie",
     htmlAttrs: {
       lang: "en",
     },
@@ -19,7 +19,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ["~/assets/css/common.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],

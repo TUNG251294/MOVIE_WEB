@@ -8,13 +8,13 @@
             align="center"
             justify="center"
           >
-            <v-col sm="5" md="4" lg="3" offset-sm="1">
-              <v-card-text class="text-left white--text font-weight-bold display-1">
+            <v-col cols="6" sm="5" md="4" offset-sm="1">
+              <v-card-text class="text-left white--text font-weight-bold text-h6 text-sm-h4 text-lg-h3">
                 {{movie.original_title}}      
               </v-card-text>
               <Rating :data="movie"/>
             </v-col>
-            <v-col sm="3" offset-sm="2" offset-md="3">
+            <v-col cols="6" sm="3" offset-sm="2" offset-md="3">
               <img height="250" :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"/>
             </v-col>
           </v-row>

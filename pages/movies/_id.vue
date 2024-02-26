@@ -87,8 +87,13 @@ import RightMovieInfo from '~/components/pages/movies/RightMovieInfo.vue'
 import SocialShare from '~/components/organisms/SocialShare.vue'
 import LeftMovieInfo from '~/components/pages/movies/LeftMovieInfo.vue'
 export default {
+  head() {
+    return {
+      title: 'Movie'
+    }
+  },
   components: { LeftMovieInfo , Rating, SocialShare, RightMovieInfo},
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios, error }) {
     try {
       const res = await $axios.$get(
         `/movie/${params.id}?append_to_response=credits,videos,images`
@@ -100,10 +105,7 @@ export default {
       }
     } catch (e) {
       console.log(e.message)
-      return {
-        data: [],
-        recommendations: []
-      }
+      error(e)
     }
   },
   computed: {

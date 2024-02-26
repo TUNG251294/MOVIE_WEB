@@ -87,23 +87,25 @@ import Rating from '~/components/organisms/Rating.vue'
 import SocialShare from '~/components/organisms/SocialShare.vue'
 import RightTVSerieInfo from '~/components/pages/tvseries/RightTVSerieInfo.vue'
 export default {
+  head() {
+    return {
+      title: 'TV Serie'
+    }
+  },
   components: { LeftTVSerieInfo, Rating, SocialShare, RightTVSerieInfo },
-  async asyncData({ params, $axios }) {
+  async asyncData({ params, $axios, error }) {
     try {
       const res = await $axios.$get(
         `/tv/${params.id}?append_to_response=credits,videos,images`
-      );
-      const res2 = await $axios.$get(`/tv/${params.id}/recommendations`);
+      )
+      const res2 = await $axios.$get(`/tv/${params.id}/recommendations`)
       return {
         data: res,
         recommendations: res2.results.slice(0,4)
-      };
+      }
     } catch (e) {
-      console.log(e.message);
-      return {
-        data: [],
-        recommendations: [],
-      };
+      console.log(e.message)
+      error(e)
     }
   },
   computed: {
@@ -112,8 +114,8 @@ export default {
       for (const item of this.data.credits.cast) {
         casts.push(item);
       }
-      return casts;
-    },
+      return casts
+    }
   },
   methods: {
     getCastAvatar(profile_path) {
@@ -121,7 +123,7 @@ export default {
         return `https://image.tmdb.org/t/p/w45${profile_path}`;
       }
       return "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1200px-User-avatar.svg.png";
-    },
-  },
-};
+    }
+  }
+}
 </script>

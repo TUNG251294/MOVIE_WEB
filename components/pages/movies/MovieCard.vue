@@ -4,7 +4,7 @@
       cover
       :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
     ></v-img>
-    <v-card-title>{{ movie.title }}</v-card-title>
+    <v-card-title class="break-word">{{ movie.title }}</v-card-title>
     <v-card-text>
       <v-row no-gutters>
         <v-rating

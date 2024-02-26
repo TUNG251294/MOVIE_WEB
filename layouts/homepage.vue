@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <Navbar />
-    <Slider class="hidden-xs-only"/>
+    <Slider/>
     <v-main>
       <v-container>
         <Nuxt />

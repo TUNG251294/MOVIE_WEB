@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <div class="text-center my-4">
-      <v-btn value="popular" class="mr-2" :color="(getBy == 'popular')? 'primary' : ''" @click="handleGetBy('popular')"
+      <v-btn value="popular" class="mr-2 mb-2" color='primary'
         >Popular</v-btn
       >
-      <v-btn value="on_the_air" class="mr-2" :color="(getBy == 'on_the_air')? 'primary' : ''" @click="handleGetBy('on_the_air')"
+      <v-btn value="on_the_air" class="mr-2 mb-2" :link=true to="/tvseries/on-the-air"
         >On The Air</v-btn
       >
-      <v-btn value="top_rated" class="mr-2" :color="(getBy == 'top_rated')? 'primary' : ''" @click="handleGetBy('top_rated')"
+      <v-btn value="top_rated" class="mr-2 mb-2" :link=true to="/tvseries/top-rated"
         >Top Rated</v-btn
       >
     </div>
@@ -45,7 +45,6 @@ head() {
   data() {
     return {
       tvseries: [],
-      getBy: "popular",
       totalResults: 1,
       totalPages: 1,
       currentPage:
@@ -56,7 +55,7 @@ head() {
   },
   async fetch() {
     await this.$axios
-      .$get(`/tv/${this.getBy}?page=${this.currentPage}`)
+      .$get(`/tv/popular?page=${this.currentPage}`)
       .then((response) => {
         this.tvseries = response.results
         this.totalResults = response.total_results
@@ -67,10 +66,6 @@ head() {
   methods: {
     handlePageChange(value) {
       this.currentPage = value
-      this.$fetch()
-    },
-    handleGetBy(value) {
-      this.getBy = value
       this.$fetch()
     }
   }
