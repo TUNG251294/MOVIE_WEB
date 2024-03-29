@@ -10,6 +10,7 @@ export default {
       lang: "en",
     },
     meta: [
+      { name: "zalo-platform-site-verification", content: "P_QY0A3J2WDgfOS7aOOl0MM4j5Y9ycS7CpSn" },
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" },
